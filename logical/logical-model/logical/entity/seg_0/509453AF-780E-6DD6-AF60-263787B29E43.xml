@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="509453AF-780E-6DD6-AF60-263787B29E43" name="DEPARTAMENTO">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 16:57:32 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_departamento" id="318182D5-4AFA-7EF7-CA71-8A99CCE1D361">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:44:18 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="91014674-1467-4740-7B99-0C58F59B08ED">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:44:39 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="86510C28-E202-AFF5-96BC-1074A5A47B2A" name="DEPARTAMENTO PK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:44:37 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>318182D5-4AFA-7EF7-CA71-8A99CCE1D361</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

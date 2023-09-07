@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="738F6F22-D77E-3D0B-E13E-21052792CCC9" containerWithKeyObject="ADB9412C-18BF-BD76-E413-42D5C21A0ED1" localFKIndex="C338733E-FDAB-0C4C-6ECF-683B85EF53D2" name="DETALLE_VOTO_CANDIDATO_FK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>CE276C7D-1AC1-3318-C2FF-57F110CE2B9B</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<referredTableLongName>CANDIDATO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>9982E849-CB48-D971-465E-8BE9A0A40881</referredTableID>
+<keyObject>E472BE61-20A2-5219-05E7-779C4074F80A</keyObject>
+<referredKeyID>E472BE61-20A2-5219-05E7-779C4074F80A</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_candidato</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

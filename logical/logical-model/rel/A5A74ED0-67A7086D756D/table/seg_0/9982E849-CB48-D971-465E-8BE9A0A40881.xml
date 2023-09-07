@@ -1,0 +1,112 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9982E849-CB48-D971-465E-8BE9A0A40881" name="CANDIDATO">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>A5E33D5B-1B51-AA47-6951-BC2E01B69769</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_candidato" id="9CF655CE-D306-D9E7-5DD6-B0F765374835">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>DC7B5EC6-C684-50DD-6FF4-2D1990821C56</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombres" id="C1E54E4E-BA06-8569-F6D8-A3D8971A7C77">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>7A42BE71-4FED-C958-109A-6D024E404A9E</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha_nacimiento" id="17884326-8845-177D-4207-D28658DBC0B6">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>6ACC8723-38D1-6984-9B98-2BB7FEE210F2</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PARTIDO_id_partido" id="C509F0C9-AD61-4FD2-7482-0A97D25DA8B4">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>3C2E2B22-CF08-3F30-8805-53EC0B2F3FCB</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C2D5DEF1-9848-EF08-0F0D-2FCC77FEE52D" referredColumn="0A08EF4B-7069-938E-8BC8-75A7DC0DF9C4"/>
+</associations>
+</Column>
+<Column name="CARGO_id_cargo" id="590AE61E-64C9-67CF-A80E-AF707A78C1D4">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>99A52A05-8E9D-F90E-181A-7CBC573E7C0E</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FA88EA66-D045-C82D-9419-D61DAE30CED3" referredColumn="BA2F5A72-1BB1-65CF-45B4-FECDD5F5EA8F"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E472BE61-20A2-5219-05E7-779C4074F80A" name="CANDIDATO_PK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>F4923EDA-1674-B42D-5516-D00D51FC30C1</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9CF655CE-D306-D9E7-5DD6-B0F765374835"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BC84A1BB-A3B9-8862-8A63-29AF8A48FC04" name="CANDIDATO_PARTIDO_FK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>253FB280-C042-1469-A6C4-3BF1D2ED39C2</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C509F0C9-AD61-4FD2-7482-0A97D25DA8B4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="171D04ED-9186-A8B4-D8F8-F40D2F52F9C9" name="CANDIDATO_CARGO_FK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>4E94EE0F-5BBF-D3A1-E908-A3169664C751</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="590AE61E-64C9-67CF-A80E-AF707A78C1D4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
