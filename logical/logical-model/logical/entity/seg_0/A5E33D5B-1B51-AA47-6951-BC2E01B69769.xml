@@ -1,0 +1,99 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A5E33D5B-1B51-AA47-6951-BC2E01B69769" name="CANDIDATO">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 17:01:30 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_candidato" id="DC7B5EC6-C684-50DD-6FF4-2D1990821C56">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:45:21 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombres" id="7A42BE71-4FED-C958-109A-6D024E404A9E">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:45:52 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fecha_nacimiento" id="6ACC8723-38D1-6984-9B98-2BB7FEE210F2">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:46:14 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_partido" id="3C2E2B22-CF08-3F30-8805-53EC0B2F3FCB">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:52:19 UTC</createdTime>
+<generatorID>253FB280-C042-1469-A6C4-3BF1D2ED39C2</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<referedAttribute>4682B7B9-04C0-EF98-3A27-689327D06133</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_cargo" id="99A52A05-8E9D-F90E-181A-7CBC573E7C0E">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:52:27 UTC</createdTime>
+<generatorID>4E94EE0F-5BBF-D3A1-E908-A3169664C751</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="true"/>
+</engineerTo>
+<referedAttribute>BF956C1E-964B-4A88-6506-B0FAA89E4A86</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F4923EDA-1674-B42D-5516-D00D51FC30C1" name="CANDIDATO PK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:45:49 UTC</createdTime>
+<ownerDesignName>logical-model</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="A5A74ED0-8768-DBED-BB38-67A7086D756D" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>DC7B5EC6-C684-50DD-6FF4-2D1990821C56</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ADB9412C-18BF-BD76-E413-42D5C21A0ED1" name="DETALLE_VOTO">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>EF4E9905-B9AC-0A9D-A240-D9DCC896F76E</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="VOTO_id_voto" id="86D678E7-2E78-E2ED-52A5-06426E1FD79B">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>4042ACAD-9391-CE17-E802-7F8F94CE5AEA</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="43EB9098-BBEB-5158-9279-7B3A5B4128D8" referredColumn="6EE6DC44-CEF8-5B9C-5C97-67B4FD9F077C"/>
+</associations>
+</Column>
+<Column name="CANDIDATO_id_candidato" id="498CB143-3EB5-F35C-052A-8BB1FB2164B3">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>46A7A90D-C8F7-0952-6B81-E4BE608CCBBC</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="738F6F22-D77E-3D0B-E13E-21052792CCC9" referredColumn="9CF655CE-D306-D9E7-5DD6-B0F765374835"/>
+</associations>
+</Column>
+<Column name="id_detalle" id="6B80ACB8-C3F9-EABA-B862-9FF3254F102F">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 20:34:16 UTC</createdTime>
+<generatorID>090AA8E5-D558-325D-1BC9-56A0836AB039</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="C76C4EFC-9C75-02B0-2790-2D00BEDA7E3B" name="DETALLE_VOTO_PK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 20:34:16 UTC</createdTime>
+<generatorID>5AAA6A93-C5FB-D00D-2AC6-F876CF8A49E2</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6B80ACB8-C3F9-EABA-B862-9FF3254F102F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CCFFD2F3-3EEE-69D4-44FE-ADFE1F18ABD6" name="DETALLE_VOTO_VOTO_FK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>4E453266-8E75-203B-E962-73E418EA591D</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="86D678E7-2E78-E2ED-52A5-06426E1FD79B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C338733E-FDAB-0C4C-6ECF-683B85EF53D2" name="DETALLE_VOTO_CANDIDATO_FK">
+<createdBy>danie</createdBy>
+<createdTime>2023-09-07 18:58:21 UTC</createdTime>
+<generatorID>CE276C7D-1AC1-3318-C2FF-57F110CE2B9B</generatorID>
+<ownerDesignName>logical-model</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="498CB143-3EB5-F35C-052A-8BB1FB2164B3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
