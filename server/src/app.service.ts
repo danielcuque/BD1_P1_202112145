@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
-
-/*
-
-*/
+import { Inject, Injectable } from '@nestjs/common';
+import { FilesService } from './files/files.service';
 
 @Injectable()
 export class AppService {
+
+    constructor(
+        @Inject(FilesService) private readonly filesService: FilesService,
+    ) { }
+
     getConsulta1(): string {
         return 'Hello World!';
     }
@@ -40,8 +42,9 @@ export class AppService {
         return 'Hello World!';
     }
 
-    getCargarTabTemp(): string {
-        return 'Hello World!';
+    async getCargarTabTemp() {
+        const cargos = await this.filesService.readFile('cargos.csv');
+        return true
     }
     getEliminarModelo(): string {
         return 'Hello World!';
