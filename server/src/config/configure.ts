@@ -1,4 +1,4 @@
-export const configure = () => ({
+export const configureConnection = () => ({
     host: process.env.HOST,  
     port: parseInt(process.env.PORT),
     database: process.env.MYSQL_DATABASE,
