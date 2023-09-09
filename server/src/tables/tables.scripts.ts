@@ -30,27 +30,27 @@ export const temporaryTables = (): string[] => {
             id_mesa INT NOT NULL,
             id_departamento INT NOT NULL
         );`,
+        
         `CREATE TEMPORARY TABLE IF NOT EXISTS tempCIUDADANO(
             dpi VARCHAR(13) NOT NULL,
             nombre VARCHAR(50)  NOT NULL,
             apellido VARCHAR(50) NOT NULL,
-            edad INT NOT NULL,
-            genero VARCHAR(1) NOT NULL,
             direccion VARCHAR(100) NOT NULL,
-            telefono VARCHAR(10) NOT NULL
+            telefono VARCHAR(10) NOT NULL,
+            edad INT NOT NULL,
+            genero VARCHAR(1) NOT NULL
         );`,
         
         `CREATE TEMPORARY TABLE IF NOT EXISTS tempVOTO(
             id_voto INT NOT NULL,
-            fecha_voto DATE NOT NULL,
             dpi VARCHAR(13) NOT NULL,
-            id_mesa INT NOT NULL
+            id_mesa INT NOT NULL,
+            fecha_voto DATETIME NOT NULL
         );`,
-        
+
         `CREATE TEMPORARY TABLE IF NOT EXISTS tempDETALLE_VOTO(
-            id_detalle INT NOT NULL,
             id_voto INT NOT NULL,
             id_candidato INT NOT NULL
-        );`
+        )`
     ];
 }

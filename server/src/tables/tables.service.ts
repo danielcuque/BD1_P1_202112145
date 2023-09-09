@@ -3,6 +3,16 @@ import { DataSource} from 'typeorm';
 import { temporaryTables } from './tables.scripts';
 import { FilesService } from 'src/files/files.service';
 
+const data = {
+    "candidatos1.csv": "INSERT INTO tempCANDIDATO VALUES(?, ?, ?, ?, ?);",
+    // "cargos.csv": "INSERT INTO tempCARGO VALUES(?, ?);",
+    // "ciudadanos.csv": "INSERT INTO tempCIUDADANO VALUES(?, ?, ?, ?, ?, ?, ?);",
+    // "departamentos.csv": "INSERT INTO tempDEPARTAMENTO VALUES(?, ?);",
+    // "mesas.csv": "INSERT INTO tempMESA VALUES(?, ?);",
+    // "partidos.csv": "INSERT INTO tempPARTIDO VALUES(?, ?, ?, ?);",
+    // "votaciones.csv": "INSERT INTO tempVOTO VALUES(?, ?, ?, ?, ?);",
+}
+
 @Injectable()
 export class TablesService {
 
@@ -12,33 +22,40 @@ export class TablesService {
     ) {}
     
     async generateTables(){
+        const statements = []
+        for (const table of temporaryTables()) {
+            statements.push({sql: table, params: []});
+        }
+
+        for (const file of Object.keys(data)) {
+            const fileData = await this.filesService.readFile(file);
+            // for (const row of fileData) {
+
+                // const params =  Object.values(row);
+            
+                // statements.push({sql: data[file], params: params});
+            // }
+        }
+        await this.executeQuery(statements);
+    }
+
+    async executeQuery(statements: {
+        sql: string,
+        params: any[]
+    }[]){
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
 
         try {
-            for (const table of temporaryTables()) {
-                await queryRunner.query(table);
-            }
-
-            const cargos = await this.filesService.readFile('cargos.csv');
-            for (const cargo of cargos) {
-                const values = Object.values(cargo);
-                await queryRunner.query(
-                    `INSERT INTO tempCARGO(id_cargo, nombre_cargo) VALUES(?, ?);`,
-                    [values[0], values[1]]
-                );
+            for (const statement of statements) {
+                await queryRunner.query(statement.sql, statement.params);
             }
 
             await queryRunner.commitTransaction();
-        }
-        catch (error) {
+        } catch (error) {
             await queryRunner.rollbackTransaction();
             throw new BadRequestException(error.message);
         }
-    
     }
-
-    // async insertData() {  
-    // }
 }
