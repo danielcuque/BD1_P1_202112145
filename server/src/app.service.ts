@@ -8,38 +8,38 @@ export class AppService {
         @Inject(TablesService) private readonly tablesService: TablesService,
     ) { }
 
-    getConsulta1(): string {
-        return 'Hello World!';
+    async getConsulta1(){
+        return await this.tablesService.executeScript(1)
     }
-    getConsulta2(): string {
-        return 'Hello World!';
+    async getConsulta2(){
+        return await this.tablesService.executeScript(2)
     }
-    getConsulta3(): string {
-        return 'Hello World!';
+    async getConsulta3(){
+        return await this.tablesService.executeScript(3)
     }
-    getConsulta4(): string {
-        return 'Hello World!';
+    async getConsulta4(){
+        return await this.tablesService.executeScript(4)
     }
-    getConsulta5(): string {
-        return 'Hello World!';
+    async getConsulta5(){
+        return await this.tablesService.executeScript(5)
     }
-    getConsulta6(): string {
-        return 'Hello World!';
+    async getConsulta6(){
+        return await this.tablesService.executeScript(6)
     }
-    getConsulta7(): string {
-        return 'Hello World!';
+    async getConsulta7(){
+        return await this.tablesService.executeScript(7)
     }
-    getConsulta8(): string {
-        return 'Hello World!';
+    async getConsulta8(){
+        return await this.tablesService.executeScript(8)
     }
-    getConsulta9(): string {
-        return 'Hello World!';
+    async getConsulta9(){
+        return await this.tablesService.executeScript(9)
     }
-    getConsulta10(): string {
-        return 'Hello World!';
+    async getConsulta10(){
+        return await this.tablesService.executeScript(10)
     }
-    getConsulta11(): string {
-        return 'Hello World!';
+    async getConsulta11(){
+        return await this.tablesService.executeScript(11)
     }
 
     async getCargarTabTemp() {
@@ -47,7 +47,8 @@ export class AppService {
         return 'Datos insertados correctamente';
     }
 
-    getEliminarModelo(): string {
+    async getEliminarModelo() {
+        await this.tablesService.deleteModel();
         return 'Modelo eliminado correctamente'
     }
 

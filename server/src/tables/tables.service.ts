@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { DataSource} from 'typeorm';
-import { insertDataToRealTables, temporaryTables } from './tables.scripts';
+import { consults, insertDataToRealTables, temporaryTables } from './tables.scripts';
 import { FilesService } from 'src/files/files.service';
 
 const data = {
@@ -72,10 +72,29 @@ export class TablesService {
         await this.executeQuery(statements);
     }
 
+    async deleteModel(){
+        await this.executeQuery([
+            {
+                sql: 'DROP TABLE IF EXISTS VOTO, DETALLE_VOTO, CANDIDATO, CARGO, CIUDADANO, DEPARTAMENTO, MESA, PARTIDO',
+                params: []
+            }
+        ])
+    }
+
+    async executeScript(index: number){
+        return await this.executeQuery([
+            {
+                sql: consults[index],
+                params: []
+            }
+        ])
+    }
+
     async executeQuery(statements: {
         sql: string,
         params: any[]
     }[]){
+        const responses = [];
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
@@ -84,7 +103,7 @@ export class TablesService {
             
             for (const statement of statements) {
                 const res = await queryRunner.query(statement.sql, statement.params);
-                console.log(statement.sql, res);
+                responses.push(res);
             }
 
             await queryRunner.commitTransaction();
@@ -92,5 +111,10 @@ export class TablesService {
             await queryRunner.rollbackTransaction();
             throw new BadRequestException(error.message);
         }
+        finally {
+            await queryRunner.release();
+        }
+
+        return responses;
     }
 }
