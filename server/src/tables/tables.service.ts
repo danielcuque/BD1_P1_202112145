@@ -28,34 +28,35 @@ export class TablesService {
             statements.push({sql: table, params: []});
         });
 
-        Object.keys(data).forEach(async (file) => {
+        
+        for (const file of Object.keys(data)) {
             const fileData = await this.filesService.parseCsvFile(file);
-          
+
             if (file === "votaciones.csv") {
-              const [votos, detallesVoto] = fileData;
-          
-              statements.push({
-                sql: 'INSERT INTO tempVOTO(id_voto, dpi, id_mesa, fecha_voto) VALUES ?',
-                params: [Array.from(votos.values())],
-              });
-          
-              statements.push({
-                sql: 'INSERT INTO tempDETALLE_VOTO(id_voto, id_candidato) VALUES ?',
-                params: [detallesVoto],
-              });
-            } else {
-              statements.push({
+                const [votos, detallesVoto] = fileData;
+            
+                statements.push({
+                  sql: 'INSERT INTO tempVOTO(id_voto, dpi, id_mesa, fecha_voto) VALUES ?',
+                  params: [Array.from(votos.values())],
+                });
+            
+                statements.push({
+                  sql: 'INSERT INTO tempDETALLE_VOTO(id_voto, id_candidato) VALUES ?',
+                  params: [detallesVoto],
+                });
+                continue;
+            } 
+            
+            statements.push({
                 sql: data[file],
                 params: [fileData],
-              });
-            }
-          });
-          
+            });
+            
 
-        // Insert data into real tables
-        
-        insertDataToRealTables().forEach((statement) => {
-            statements.push({sql: statement, params: []});
+        }
+
+        insertDataToRealTables().forEach((query) => {
+            statements.push({sql: query, params: []});
         });
 
         await this.executeQuery(statements);
@@ -64,7 +65,6 @@ export class TablesService {
     async createRealTables(){
         const rawTables =  await this.filesService.readFile('../../../store/script.sql');
 
-        // Skip last position because it is empty
         const statements = rawTables.split(';').slice(0, -1).map((statement) => {
             return {sql: statement, params: []};
         });
@@ -76,7 +76,6 @@ export class TablesService {
         sql: string,
         params: any[]
     }[]){
-        console.log('statements', statements);
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
@@ -84,7 +83,8 @@ export class TablesService {
         try {
             
             for (const statement of statements) {
-                await queryRunner.query(statement.sql, statement.params);
+                const res = await queryRunner.query(statement.sql, statement.params);
+                console.log(statement.sql, res);
             }
 
             await queryRunner.commitTransaction();
