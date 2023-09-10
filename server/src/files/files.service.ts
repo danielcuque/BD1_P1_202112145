@@ -33,27 +33,14 @@ export class FilesService {
           const parts = value.split(' ');
           if (parts.length === 1){
             const [day, month, year] = parts[0].split('/');
-            record[key] = new Date(
-              Date.UTC(
-                parseInt(year),
-                parseInt(month) - 1,
-                parseInt(day)
-              )
-            );
+            record[key] = `${year}-${month}-${day}`;
+            continue
+          } 
 
-          } else {
-            const [day, month, year] = parts[0].split('/');
-            const [hour, minute] = parts[1].split(':');
-            record[key] = new Date(
-              Date.UTC(
-                parseInt(year),
-                parseInt(month) - 1,
-                parseInt(day),
-                parseInt(hour),
-                parseInt(minute)
-              )
-            );
-          }
+          const [day, month, year] = parts[0].split('/');
+          const [hour, minute] = parts[1].split(':');
+          record[key] = `${year}-${month}-${day} ${hour}:${minute}`;
+          
         }
       }
 

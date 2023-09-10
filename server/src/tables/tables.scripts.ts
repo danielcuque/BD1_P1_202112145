@@ -50,7 +50,11 @@ export const temporaryTables = (): string[] => {
 
         `CREATE TEMPORARY TABLE IF NOT EXISTS tempDETALLE_VOTO(
             id_voto INT NOT NULL,
-            id_candidato INT NOT NULL
+            id_candidato INT NOT NULL,
+            id_detalle INT NOT NULL AUTO_INCREMENT PRIMARY KEY
         )`
     ];
+}
+
+export const createTables = ()=> {
 }
