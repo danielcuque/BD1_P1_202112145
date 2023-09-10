@@ -1,15 +1,15 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { DataSource} from 'typeorm';
-import { temporaryTables } from './tables.scripts';
+import { insertDataToRealTables, temporaryTables } from './tables.scripts';
 import { FilesService } from 'src/files/files.service';
 
 const data = {
-    "candidatos.csv": "INSERT INTO tempCANDIDATO(id_candidato, nombre_candidato, fecha_nacimiento, id_partido, id_cargo) VALUES",
-    "cargos.csv": "INSERT INTO tempCARGO VALUES",
-    "ciudadanos.csv": "INSERT INTO tempCIUDADANO VALUES",
-    "departamentos.csv": "INSERT INTO tempDEPARTAMENTO VALUES",
-    "mesas.csv": "INSERT INTO tempMESA VALUES",
-    "partidos.csv": "INSERT INTO tempPARTIDO VALUES",
+    "candidatos.csv": "INSERT INTO tempCANDIDATO(id_candidato, nombre_candidato, fecha_nacimiento, id_partido, id_cargo) VALUES ?",
+    "cargos.csv": "INSERT INTO tempCARGO(id_cargo, nombre_cargo) VALUES ?",
+    "ciudadanos.csv": "INSERT INTO tempCIUDADANO(dpi, nombre, apellido, direccion, telefono, edad, genero) VALUES ?",
+    "departamentos.csv": "INSERT INTO tempDEPARTAMENTO(id_departamento, nombre_departamento) VALUES ?",
+    "mesas.csv": "INSERT INTO tempMESA(id_mesa, id_departamento) VALUES ?",
+    "partidos.csv": "INSERT INTO tempPARTIDO(id_partido, nombre_partido, siglas, fecha_fundacion) VALUES ?",
     "votaciones.csv": "",
 }
 
@@ -23,41 +23,40 @@ export class TablesService {
     
     async generateTables(){
         const statements = []
-        for (const table of temporaryTables()) {
+
+        temporaryTables().forEach((table) => {
             statements.push({sql: table, params: []});
-        }
+        });
 
-        for (const file of Object.keys(data)) {
+        Object.keys(data).forEach(async (file) => {
             const fileData = await this.filesService.readFile(file);
-
-            if (file === "votaciones.csv"){
-                const [votos, detallesVoto] = fileData;
-
-                statements.push({sql: `INSERT INTO tempVOTO(id_voto, dpi, id_mesa, fecha_voto) 
-                VALUES ${Array.from(votos.values()).map((voto) => `(${Object.values(voto).map((value) => `"${value}"`).join(',')})`).join(',')};`, params: []});
-
-                statements.push({sql: `INSERT INTO tempDETALLE_VOTO(id_voto, id_candidato)
-                VALUES ${detallesVoto.map((detalle) => `(${Object.values(detalle).map((value) => `"${value}"`).join(',')})`).join(',')};`, params: []});
-                continue;
+          
+            if (file === "votaciones.csv") {
+              const [votos, detallesVoto] = fileData;
+          
+              statements.push({
+                sql: 'INSERT INTO tempVOTO(id_voto, dpi, id_mesa, fecha_voto) VALUES ?',
+                params: [Array.from(votos.values())],
+              });
+          
+              statements.push({
+                sql: 'INSERT INTO tempDETALLE_VOTO(id_voto, id_candidato) VALUES ?',
+                params: [detallesVoto.map((row) => Object.values(row))],
+              });
+            } else {
+              statements.push({
+                sql: data[file],
+                params: [fileData.map((row) => Object.values(row))],
+              });
             }
-            const query = `${data[file]}
-            ${fileData.map((row) => `(${Object.values(row).map((value) => `"${value}"`).join(',')})`)};
-            `
-
-            statements.push({sql: 
-                query
-                , params: []});
-        }
+          });
+          
 
         // Insert data into real tables
-        statements.push({sql: 'INSERT INTO DEPARTAMENTO SELECT * FROM tempDEPARTAMENTO;', params: []});
-        statements.push({sql: 'INSERT INTO CARGO SELECT * FROM tempCARGO;', params: []});
-        statements.push({sql: 'INSERT INTO PARTIDO SELECT * FROM tempPARTIDO;', params: []});
-        statements.push({sql: 'INSERT INTO CIUDADANO SELECT * FROM tempCIUDADANO;', params: []});
-        statements.push({sql: 'INSERT INTO MESA SELECT * FROM tempMESA;', params: []});
-        statements.push({sql: 'INSERT INTO CANDIDATO SELECT * FROM tempCANDIDATO;', params: []});
-        statements.push({sql: 'INSERT INTO VOTO SELECT * FROM tempVOTO;', params: []});
-        statements.push({sql: 'INSERT INTO DETALLE_VOTO(id_voto, id_candidato) SELECT id_voto, id_candidato FROM tempDETALLE_VOTO;', params: []});
+        
+        insertDataToRealTables().forEach((statement) => {
+            statements.push({sql: statement, params: []});
+        });
 
         await this.executeQuery(statements);
     }

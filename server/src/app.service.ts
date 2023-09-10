@@ -44,8 +44,7 @@ export class AppService {
 
     async getCargarTabTemp() {
         await this.tablesService.generateTables();
-        // await this.tablesService.insertData();
-        return 'Hello World!';
+        return 'Datos insertados correctamente';
     }
     getEliminarModelo(): string {
         return 'Hello World!';

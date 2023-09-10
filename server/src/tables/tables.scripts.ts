@@ -58,3 +58,14 @@ export const temporaryTables = (): string[] => {
 
 export const createTables = ()=> {
 }
+
+export const insertDataToRealTables = ()=> [
+    `INSERT INTO DEPARTAMENTO SELECT * FROM tempDEPARTAMENTO;`,
+    `INSERT INTO CARGO SELECT * FROM tempCARGO;`,
+    `INSERT INTO PARTIDO SELECT * FROM tempPARTIDO;`,
+    `INSERT INTO CIUDADANO SELECT * FROM tempCIUDADANO;`,
+    `INSERT INTO MESA SELECT * FROM tempMESA;`,
+    `INSERT INTO CANDIDATO SELECT * FROM tempCANDIDATO;`,
+    `INSERT INTO VOTO SELECT * FROM tempVOTO;`,
+    `INSERT INTO DETALLE_VOTO(id_voto, id_candidato) SELECT id_voto, id_candidato FROM tempDETALLE_VOTO;`,
+]
