@@ -41,12 +41,12 @@ export class TablesService {
           
               statements.push({
                 sql: 'INSERT INTO tempDETALLE_VOTO(id_voto, id_candidato) VALUES ?',
-                params: [detallesVoto.map((row) => Object.values(row))],
+                params: [detallesVoto],
               });
             } else {
               statements.push({
                 sql: data[file],
-                params: [fileData.map((row) => Object.values(row))],
+                params: [fileData],
               });
             }
           });

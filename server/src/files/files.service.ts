@@ -14,8 +14,8 @@ export class FilesService {
     const csvParser = CsvParse({
       delimiter: ',',
       columns: true,
-      skip_empty_lines: true,
       trim: true,
+      bom: true,
     });
 
     const stream = createReadStream(fullPath)
@@ -27,22 +27,21 @@ export class FilesService {
     }
 
     for await (const record of parser) {
-      for (const key in record) {
+      Object.keys(record).forEach((key) => {
         const value = record[key];
         if (value.split('/').length === 3) {
           const parts = value.split(' ');
           if (parts.length === 1){
             const [day, month, year] = parts[0].split('/');
             record[key] = `${year}-${month}-${day}`;
-            continue
+            return
           } 
 
           const [day, month, year] = parts[0].split('/');
           const [hour, minute] = parts[1].split(':');
-          record[key] = `${year}-${month}-${day} ${hour}:${minute}`;
-          
+          record[key] = `${year}-${month}-${day} ${hour}:${minute}`; 
         }
-      }
+      })
 
       if ('' in record) delete record['']
 
@@ -59,7 +58,7 @@ export class FilesService {
         continue;
       }
 
-      results.push(record)
+      results.push(Object.values(record))
     }
 
     return results;
