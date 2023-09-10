@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import { parse as CsvParse } from 'csv-parse';
@@ -21,83 +21,60 @@ export class FilesService {
     const stream = createReadStream(fullPath)
     const parser = stream.pipe(csvParser);
 
-    for await (const record of parser) {
-      // for (const key in record) {
-      //   const value = record[key];
-      //   if (value.split('/').length === 3) {
-      //     const parts = value.split(' ');
-      //     if (parts.length === 1){
-      //       const [day, month, year] = parts[0].split('/');
-      //       record[key] = new Date(
-      //         Date.UTC(
-      //           parseInt(year),
-      //           parseInt(month) - 1,
-      //           parseInt(day)
-      //         )
-      //       );
+    if (path === 'votaciones.csv') {
+      results.push(
+        new Map(), [])
+    }
 
-      //     } else {
-      //       const [day, month, year] = parts[0].split('/');
-      //       const [hour, minute] = parts[1].split(':');
-      //       record[key] = new Date(
-      //         Date.UTC(
-      //           parseInt(year),
-      //           parseInt(month) - 1,
-      //           parseInt(day),
-      //           parseInt(hour),
-      //           parseInt(minute)
-      //         )
-      //       );
-      //     }
-      //   }
-      // }
+    for await (const record of parser) {
+      for (const key in record) {
+        const value = record[key];
+        if (value.split('/').length === 3) {
+          const parts = value.split(' ');
+          if (parts.length === 1){
+            const [day, month, year] = parts[0].split('/');
+            record[key] = new Date(
+              Date.UTC(
+                parseInt(year),
+                parseInt(month) - 1,
+                parseInt(day)
+              )
+            );
+
+          } else {
+            const [day, month, year] = parts[0].split('/');
+            const [hour, minute] = parts[1].split(':');
+            record[key] = new Date(
+              Date.UTC(
+                parseInt(year),
+                parseInt(month) - 1,
+                parseInt(day),
+                parseInt(hour),
+                parseInt(minute)
+              )
+            );
+          }
+        }
+      }
+
+      if ('' in record) delete record['']
+
+      if (path === 'votaciones.csv') {
+        const [voto, detalle_voto] = results;
+        const { id_voto, id_candidato, dpi_ciudadano, mesa_id, fecha_hora } = record;
+
+        if (!voto.has(dpi_ciudadano)) {
+          voto.set(dpi_ciudadano, [id_voto, dpi_ciudadano, mesa_id, fecha_hora]);
+        }
+
+        detalle_voto.push([id_voto, id_candidato]);
+        
+        continue;
+      }
 
       results.push(record)
     }
 
     return results;
-
-    // return new Promise((resolve, reject) => {
-    //   createReadStream(fullPath)
-    //     .pipe(csvParser())
-    //     .on('data', (data) => 
-    //     {
-    //       for (const key in data) {
-    //         const value = data[key];
-    //         if (value.split('/').length === 3) {
-    //           const parts = value.split(' ');
-    //           if (parts.length === 1){
-    //             const [day, month, year] = parts[0].split('/');
-    //             data[key] = new Date(
-    //               Date.UTC(
-    //                 parseInt(year),
-    //                 parseInt(month) - 1,
-    //                 parseInt(day)
-    //               )
-    //             );
-
-    //           } else {
-    //             const [day, month, year] = parts[0].split('/');
-    //             const [hour, minute] = parts[1].split(':');
-    //             data[key] = new Date(
-    //               Date.UTC(
-    //                 parseInt(year),
-    //                 parseInt(month) - 1,
-    //                 parseInt(day),
-    //                 parseInt(hour),
-    //                 parseInt(minute)
-    //               )
-    //             );
-    //           }
-    //         }
-    //       }
-
-    //       results.push(data)
-
-    //     })
-    //     .on('end', () => resolve(results))
-    //     .on('error', (error) => 
-    //       reject(new BadRequestException(error.message)));
-    // });
   }
 }

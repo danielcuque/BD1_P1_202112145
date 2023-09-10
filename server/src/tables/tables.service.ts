@@ -4,13 +4,13 @@ import { temporaryTables } from './tables.scripts';
 import { FilesService } from 'src/files/files.service';
 
 const data = {
-    "candidatos1.csv": "INSERT INTO tempCANDIDATO VALUES(?, ?, ?, ?, ?);",
-    // "cargos.csv": "INSERT INTO tempCARGO VALUES(?, ?);",
-    // "ciudadanos.csv": "INSERT INTO tempCIUDADANO VALUES(?, ?, ?, ?, ?, ?, ?);",
-    // "departamentos.csv": "INSERT INTO tempDEPARTAMENTO VALUES(?, ?);",
-    // "mesas.csv": "INSERT INTO tempMESA VALUES(?, ?);",
-    // "partidos.csv": "INSERT INTO tempPARTIDO VALUES(?, ?, ?, ?);",
-    // "votaciones.csv": "INSERT INTO tempVOTO VALUES(?, ?, ?, ?, ?);",
+    "candidatos.csv": "INSERT INTO tempCANDIDATO VALUES (?, ?, ?, ?, ?);",
+    "cargos.csv": "INSERT INTO tempCARGO VALUES (?, ?);",
+    "ciudadanos.csv": "INSERT INTO tempCIUDADANO VALUES (?, ?, ?, ?, ?, ?, ?);",
+    "departamentos.csv": "INSERT INTO tempDEPARTAMENTO VALUES (?, ?);",
+    "mesas.csv": "INSERT INTO tempMESA VALUES (?, ?);",
+    "partidos.csv": "INSERT INTO tempPARTIDO VALUES (?, ?, ?, ?);",
+    "votaciones.csv": "",
 }
 
 @Injectable()
@@ -29,12 +29,14 @@ export class TablesService {
 
         for (const file of Object.keys(data)) {
             const fileData = await this.filesService.readFile(file);
-            // for (const row of fileData) {
 
-                // const params =  Object.values(row);
-            
-                // statements.push({sql: data[file], params: params});
-            // }
+            if (file === "votaciones.csv"){
+                const [votos, detallesVoto] = fileData;
+                statements.push({sql: 'INSERT INTO tempVOTO VALUES(?, ?, ?, ?);', params: Array.from(votos.values()).flat()});
+                statements.push({sql: 'INSERT INTO tempDETALLE_VOTO VALUES(?, ?);', params: detallesVoto.flat()});
+                continue;
+            }
+            statements.push({sql: data[file] , params: fileData.map(row => Object.values(row)).flat()});
         }
         await this.executeQuery(statements);
     }
