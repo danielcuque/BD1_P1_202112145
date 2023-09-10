@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { createReadStream } from 'fs';
 import { join } from 'path';
+import { readFile } from 'fs';
 import { parse as CsvParse } from 'csv-parse';
 
 
 @Injectable()
 export class FilesService {
-  async readFile(path: string): Promise<any> {
+  async parseCsvFile(path: string) {
     const results = []
 
     const fullPath = join(__dirname, '..', '..','..', 'dataset', path);
@@ -62,5 +63,16 @@ export class FilesService {
     }
 
     return results;
+  }
+
+  // Read a simple text file
+  async readFile(path: string): Promise<string> {
+    const fullPath = join(__dirname, path);
+    return new Promise((resolve, reject) => {
+      readFile(fullPath, 'utf8', (err, data) => {
+        if (err) reject(err);
+        resolve(data);
+      });
+    });
   }
 }

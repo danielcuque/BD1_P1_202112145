@@ -46,10 +46,13 @@ export class AppService {
         await this.tablesService.generateTables();
         return 'Datos insertados correctamente';
     }
+
     getEliminarModelo(): string {
-        return 'Hello World!';
+        return 'Modelo eliminado correctamente'
     }
-    getCrearModelo(): string {
-        return 'Hello World!';
+
+    async getCrearModelo() {
+        await this.tablesService.createRealTables();
+        return 'Modelo creado correctamente';
     }
 }

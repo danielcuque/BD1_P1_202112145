@@ -29,7 +29,7 @@ export class TablesService {
         });
 
         Object.keys(data).forEach(async (file) => {
-            const fileData = await this.filesService.readFile(file);
+            const fileData = await this.filesService.parseCsvFile(file);
           
             if (file === "votaciones.csv") {
               const [votos, detallesVoto] = fileData;
@@ -60,17 +60,31 @@ export class TablesService {
 
         await this.executeQuery(statements);
     }
+
+    async createRealTables(){
+        const rawTables =  await this.filesService.readFile('../../../store/script.sql');
+
+        // Skip last position because it is empty
+        const statements = rawTables.split(';').slice(0, -1).map((statement) => {
+            return {sql: statement, params: []};
+        });
+
+        await this.executeQuery(statements);
+    }
+
     async executeQuery(statements: {
         sql: string,
         params: any[]
     }[]){
+        console.log('statements', statements);
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
 
         try {
+            
             for (const statement of statements) {
-                const response = await queryRunner.query(statement.sql, statement.params);
+                await queryRunner.query(statement.sql, statement.params);
             }
 
             await queryRunner.commitTransaction();

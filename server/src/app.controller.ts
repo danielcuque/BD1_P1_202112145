@@ -6,57 +6,57 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
     @Get('/consulta1')
-    getConsulta1(): string {
+    async getConsulta1(){
         return this.appService.getConsulta1();
     }
 
     @Get('/consulta2')
-    getConsulta2(): string {
+    async getConsulta2(){
         return this.appService.getConsulta2();
     }
 
     @Get('/consulta3')
-    getConsulta3(): string {
+    async getConsulta3(){
         return this.appService.getConsulta3();
     }
 
     @Get('/consulta4')
-    getConsulta4(): string {
+    async getConsulta4(){
         return this.appService.getConsulta4();
     }
 
     @Get('/consulta5')
-    getConsulta5(): string {
+    async getConsulta5(){
         return this.appService.getConsulta5();
     }
 
     @Get('/consulta6')
-    getConsulta6(): string {
+    async getConsulta6(){
         return this.appService.getConsulta6();
     }
 
     @Get('/consulta7')
-    getConsulta7(): string {
+    async getConsulta7(){
         return this.appService.getConsulta7();
     }
 
     @Get('/consulta8')
-    getConsulta8(): string {
+    async getConsulta8(){
         return this.appService.getConsulta8();
     }
 
     @Get('/consulta9')
-    getConsulta9(): string {
+    async getConsulta9(){
         return this.appService.getConsulta9();
     }
 
     @Get('/consulta10')
-    getConsulta10(): string {
+    async getConsulta10(){
         return this.appService.getConsulta10();
     }
 
     @Get('/consulta11')
-    getConsulta11(): string {
+    async getConsulta11(){
         return this.appService.getConsulta11();
     }
 
@@ -66,12 +66,12 @@ export class AppController {
     }
 
     @Get('/eliminarmodelo')
-    getEliminarModelo(): string {
+    async getEliminarModelo() {
         return this.appService.getEliminarModelo();
     }
 
     @Get('/crearmodelo')
-    getCrearModelo(): string {
+    async getCrearModelo() {
         return this.appService.getCrearModelo();
     }
 }

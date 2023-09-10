@@ -56,11 +56,6 @@ export const temporaryTables = (): string[] => {
     ];
 }
 
-export const createTables = ()=> {
-    // Read script.sql file and return its content
-
-}
-
 export const insertDataToRealTables = ()=> [
     `INSERT INTO DEPARTAMENTO SELECT * FROM tempDEPARTAMENTO;`,
     `INSERT INTO CARGO SELECT * FROM tempCARGO;`,
