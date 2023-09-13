@@ -174,7 +174,9 @@ export const consults:{
         LIMIT 5;
     `,
     10: `
-        SELECT DATE_FORMAT(fecha_voto, '%H') AS Hora, COUNT(*) AS Cantidad
+        SELECT 
+        DATE_FORMAT(fecha_voto, '%d/%m/%Y %H:%i')
+        AS Hora, COUNT(*) AS Cantidad
         FROM VOTO
         GROUP BY Hora
         ORDER BY Cantidad DESC
