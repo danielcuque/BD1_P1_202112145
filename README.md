@@ -1,1 +1,2 @@
-# BD1_P1_202112145
+# Proyecto 1
+## Sistemas de bases de datos 1 - USAC 
